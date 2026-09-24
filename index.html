@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iraqi Society Sports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burgundy: #7c1f2b;
+      --burgundy-deep: #5a101e;
+      --beige: #f2e9df;
+      --beige-deep: #d9cab3;
+      --cream: #f9f4ee;
+      --ink: #1a1718;
+      --muted: #54494b;
+      --panel: #fffdfb;
+      --line: #d7c3ad;
+      --brown: #a25d29;
+      --shadow: 0 14px 30px rgba(86, 26, 34, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--beige);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+    }
+    h1, h2, h3, .brand-mark, .nav a, .cta {
+      font-family: "Archivo", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      background: linear-gradient(180deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(72, 16, 22, 0.18);
+    }
+
+    .header-inner,
+    .container,
+    .footer-inner {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      display: block;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .brand-mark svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-text strong {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-text span {
+      font-size: 0.72rem;
+      color: #f5e4dc;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+
+    .nav a {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: #f9efe9;
+      opacity: 0.85;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover { opacity: 1; }
+
+    .container {
+      padding: 36px 0 50px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr 0.75fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .story-panel,
+    .cta-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 12px;
+      background: rgba(124, 31, 43, 0.08);
+      color: var(--burgundy);
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy h1 {
+      margin: 16px 0 12px;
+      font-size: clamp(2.3rem, 3.3vw, 3.9rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      color: var(--burgundy);
+    }
+
+    .hero-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 54ch;
+    }
+
+    .hero-actions {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      background: var(--burgundy);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 20px rgba(124, 31, 43, 0.18);
+    }
+
+    .cta.secondary {
+      background: var(--brown);
+      box-shadow: none;
+    }
+
+    .hero-card {
+      padding: 22px;
+      background: linear-gradient(180deg, #f9f1ea 0%, #fffdfb 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .mini-stat {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(124, 31, 43, 0.04);
+      border: 1px solid rgba(124, 31, 43, 0.08);
+    }
+
+    .mini-stat .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mini-stat strong {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(1.5rem, 2vw, 2.2rem);
+      color: var(--burgundy);
+      line-height: 1.1;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 8px;
+    }
+
+    .story-panel,
+    .cta-panel {
+      padding: 26px 24px;
+    }
+
+    .story-panel h2,
+    .cta-panel h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      letter-spacing: -0.05em;
+      color: var(--burgundy);
+    }
+
+    .story-panel p,
+    .cta-panel p,
+    .cta-panel li {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .cta-panel ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+
+    .panel-link {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--burgundy);
+    }
+
+    .panel-link::after {
+      content: "→";
+      transition: transform 0.2s ease;
+    }
+
+    .panel-link:hover::after {
+      transform: translateX(3px);
+    }
+
+    .site-footer {
+      background: var(--burgundy-deep);
+      color: #fffaf5;
+      margin-top: 18px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 1.35rem 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .footer-brand .brand-mark {
+      width: 40px;
+      height: 40px;
+    }
+
+    .footer-brand span {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .community {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .community .wa-icon {
+      font-size: 1.2rem;
+    }
+
+    .footer-note {
+      font-size: 0.92rem;
+      color: #f4e3d8;
+      text-align: right;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 0 1.1rem;
+      }
+
+      .nav {
+        justify-content: flex-start;
+        gap: 12px 18px;
+      }
+
+      .hero,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+      }
+
+      .footer-note {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" aria-label="Iraqi Society Sports brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="Icon.png" alt="Iraqi Society Sports" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:18px;" />
+        </div>
+        <div class="brand-text">
+          <strong>Iraqi Society Sports</strong>
+          <span>Community & football</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="MatchDay.html">Matchday</a>
+        <a href="https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv" target="_blank" rel="noreferrer">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Welcome</span>
+        <h1>Play hard. Train together. Represent the club.</h1>
+        <p>
+          Iraqi Society Sports brings together football lovers who want a positive environment,
+          good energy, and weekly matches with a clear structure and a welcoming community.
+        </p>
+        <div class="hero-actions">
+          <a class="cta" href="MatchDay.html">View matches</a>
+          <a class="cta secondary" href="https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv" target="_blank" rel="noreferrer">Join community</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Club highlights">
+        <div class="mini-stat">
+          <span class="label">Next game</span>
+          <strong>Sunday</strong>
+        </div>
+        <div class="mini-stat">
+          <span class="label">Club focus</span>
+          <strong>Team spirit</strong>
+        </div>
+        <div class="mini-stat">
+          <span class="label">Community</span>
+          <strong>Weekly updates</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <article class="story-panel">
+        <h2>Football information</h2>
+        <p>
+          Campus League will take place at Goodwin Sports Centre on Sunday at 2:00 PM.
+        </p>
+        <p>
+          To play, enroll on the matchday page and make sure you are ready for the session.
+        </p>
+        <p>
+          You need to make an account on BUCS. Download the app <strong>BUCS Play</strong> and create your account before playing.
+        </p>
+      </article>
+
+      <article class="cta-panel">
+        <h2>More information</h2>
+        <p>Any new updates will be added here.</p>
+        <ul>
+          <li>Sunday at 2:00 PM — Campus League — 5-a-side</li>
+          <li>Tuesday at 8:00 PM — Pichengeas (friendly match) — 6 aside or 5 aside {TBA}</li>
+          <li>Wednesday at 5:00 PM — Friendly match — 6 aside</li>
+        </ul>
+        <a class="panel-link" href="MatchDay.html">Go to matchday</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="Icon.png" alt="Iraqi Society Sports" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:12px;" />
+        </div>
+        <span>Iraqi Society Sports</span>
+      </div>
+
+      <a class="community" href="https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv" target="_blank" rel="noreferrer">
+        <span class="wa-icon" aria-hidden="true">💬</span>
+        Sports WhatsApp Community
+      </a>
+
+      <div class="footer-note">We strive with effort, and the outcome is with Allah (SWT).</div>
+    </div>
+  </footer>
+</body>
+</html>

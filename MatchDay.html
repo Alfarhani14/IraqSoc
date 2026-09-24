@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matchday | Iraqi Society Sports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burgundy: #7c1f2b;
+      --burgundy-deep: #5a101e;
+      --beige: #f2e9df;
+      --beige-deep: #d9cab3;
+      --cream: #f9f4ee;
+      --ink: #1a1718;
+      --muted: #54494b;
+      --panel: #fffdfb;
+      --line: #d7c3ad;
+      --brown: #a25d29;
+      --shadow: 0 14px 30px rgba(86, 26, 34, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--beige);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+    }
+    h1, h2, h3, .brand-mark, .nav a, .cta, .slot-label {
+      font-family: "Archivo", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      background: linear-gradient(180deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(72, 16, 22, 0.18);
+    }
+
+    .header-inner,
+    .container,
+    .footer-inner {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 18px;
+      display: block;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: transparent;
+    }
+
+    .brand-mark svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-text strong {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-text span {
+      font-size: 0.72rem;
+      color: #f5e4dc;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+
+    .nav a {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: #f9efe9;
+      opacity: 0.85;
+      text-transform: uppercase;
+    }
+
+    .page-wrap {
+      padding: 32px 0 48px;
+    }
+
+    .hero {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: var(--burgundy);
+    }
+
+    .hero p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 58ch;
+    }
+
+    .calendar-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .calendar-panel,
+    .details-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .calendar-panel {
+      padding: 20px;
+    }
+
+    .slot {
+      position: relative;
+      width: 100%;
+      text-align: left;
+      background: #f8f2ea;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 14px;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      color: var(--ink);
+    }
+
+    .slot:hover {
+      transform: translateY(-2px);
+      border-color: rgba(124, 31, 43, 0.35);
+      box-shadow: 0 12px 24px rgba(86, 26, 34, 0.07);
+    }
+
+    .slot.selected {
+      background: rgba(124, 31, 43, 0.06);
+      border-color: rgba(124, 31, 43, 0.4);
+    }
+
+    .slot.full {
+      opacity: 0.78;
+    }
+
+    .slot-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .slot-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .slot strong {
+      display: block;
+      font-size: 1.45rem;
+      letter-spacing: -0.06em;
+      margin-bottom: 4px;
+      color: var(--burgundy);
+    }
+
+    .slot small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+
+    .details-panel {
+      padding: 22px 20px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .detail-eyebrow {
+      display: inline-flex;
+      padding: 7px 10px;
+      background: rgba(124, 31, 43, 0.08);
+      color: var(--burgundy);
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .details-panel h2 {
+      margin: 18px 0 8px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+      color: var(--burgundy);
+    }
+
+    .details-panel .location {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 16px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .meta-row strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: var(--burgundy);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 12px 20px rgba(124, 31, 43, 0.2);
+    }
+
+    .cta.secondary {
+      background: var(--brown);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(124, 31, 43, 0.03);
+      border: 1px solid rgba(124, 31, 43, 0.08);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .site-footer {
+      background: var(--burgundy-deep);
+      color: #fffaf5;
+      margin-top: 30px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 1.35rem 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-brand .brand-mark {
+      width: 40px;
+      height: 40px;
+    }
+
+    .community {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .community .wa-icon {
+      font-size: 1.2rem;
+    }
+
+    .footer-note {
+      font-size: 0.92rem;
+      color: #f4e3d8;
+      text-align: right;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 780px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav {
+        justify-content: flex-start;
+        gap: 12px 18px;
+      }
+      .calendar-layout {
+        grid-template-columns: 1fr;
+      }
+      .footer-inner {
+        align-items: flex-start;
+      }
+      .footer-note {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand" aria-label="Iraqi Society Sports brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="Icon.png" alt="Iraqi Society Sports" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:18px;" />
+        </div>
+        <div class="brand-text">
+          <strong>Iraqi Society Sports</strong>
+          <span>Community & football</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="MatchDay.html">Matchday</a>
+        <a href="https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv" target="_blank" rel="noreferrer">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-wrap">
+    <section class="hero">
+      <div>
+        <h1>Matchday calendar</h1>
+        <p>Select a slot to see the match details, location, game type, and enrollment options.</p>
+      </div>
+    </section>
+
+    <section class="calendar-layout">
+      <div class="calendar-panel" id="calendarPanel" aria-live="polite"></div>
+
+      <aside class="details-panel" id="detailsPanel" aria-live="polite">
+        <div class="detail-eyebrow" id="detailType">Match</div>
+        <h2 id="detailTitle">Choose a slot</h2>
+        <p class="location" id="detailLocation">Pick a match to view the time, place, and game type.</p>
+
+        <div class="meta-list">
+          <div class="meta-row"><span>Day</span><strong id="detailDay">--</strong></div>
+          <div class="meta-row"><span>Time</span><strong id="detailTime">--</strong></div>
+          <div class="meta-row"><span>Location</span><strong id="detailLocationText">--</strong></div>
+          <div class="meta-row"><span>Game type</span><strong id="detailGameType">--</strong></div>
+        </div>
+
+        <div class="action-row">
+          <button class="cta" id="enrollButton" type="button">Enroll</button>
+          <a class="cta secondary" href="index.html">Back home</a>
+        </div>
+
+        <div class="notice">Everyone taps Enroll and sends you a WhatsApp message, so you can track interest directly in the chat.</div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="Icon.png" alt="Iraqi Society Sports" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:12px;" />
+        </div>
+        <span>Iraqi Society Sports</span>
+      </div>
+
+      <a class="community" href="https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv" target="_blank" rel="noreferrer">
+        <span class="wa-icon" aria-hidden="true">💬</span>
+        Sports WhatsApp Community
+      </a>
+
+      <div class="footer-note">We strive with effort, and the outcome is with Allah (SWT).</div>
+    </div>
+  </footer>
+
+  <script>
+    const WHATSAPP_NUMBER = "447749555886";
+    const COMMUNITY_LINK = "https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv";
+
+    const MATCHES = [
+      { id: "sunday", day: "Sunday", date: "This Sunday", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "tuesday", day: "Tuesday", date: "Next Tuesday", time: "8:00 PM", place: "TBA", gameType: "Pichengeas (friendly match) - 6 aside or 5 aside {TBA}" },
+      { id: "wednesday", day: "Wednesday", date: "Next Wednesday", time: "5:00 PM", place: "TBA", gameType: "Friendly match - 6 aside" }
+    ];
+
+    let selectedMatchId = "sunday";
+
+    function renderCalendar() {
+      const panel = document.getElementById("calendarPanel");
+      panel.innerHTML = "";
+
+      MATCHES.forEach((match) => {
+        const isSelected = match.id === selectedMatchId;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `slot ${isSelected ? "selected" : ""}`;
+        button.setAttribute("data-id", match.id);
+        button.innerHTML = `
+          <div class="slot-top">
+            <span class="slot-label">${match.day}</span>
+          </div>
+          <strong>${match.time}</strong>
+          <small>${match.gameType}<br>${match.place}</small>
+        `;
+
+        button.addEventListener("click", () => {
+          selectedMatchId = match.id;
+          renderCalendar();
+          renderDetails();
+        });
+
+        panel.appendChild(button);
+      });
+    }
+
+    function renderDetails() {
+      const match = MATCHES.find((item) => item.id === selectedMatchId) || MATCHES[0];
+
+      document.getElementById("detailType").textContent = "Match";
+      document.getElementById("detailTitle").textContent = `${match.day} at ${match.time}`;
+      document.getElementById("detailLocation").textContent = `${match.place}`;
+      document.getElementById("detailDay").textContent = match.day;
+      document.getElementById("detailTime").textContent = match.time;
+      document.getElementById("detailLocationText").textContent = match.place;
+      document.getElementById("detailGameType").textContent = match.gameType;
+    }
+
+    function enrollSelectedMatch() {
+      const match = MATCHES.find((item) => item.id === selectedMatchId) || MATCHES[0];
+      const name = prompt("Your name for the team list:");
+      if (!name || !name.trim()) return;
+
+      const trimmed = name.trim();
+      const text = `Hi, I'd like to play — ${match.day} ${match.time} at ${match.place}. Game type: ${match.gameType}. Name: ${trimmed}`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+    }
+
+    document.getElementById("enrollButton").addEventListener("click", enrollSelectedMatch);
+
+    renderCalendar();
+    renderDetails();
+  </script>
+</body>
+</html>
+
