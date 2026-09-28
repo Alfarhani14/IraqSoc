@@ -161,6 +161,50 @@
       padding: 20px;
     }
 
+    .calendar-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .calendar-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .toggle-cards {
+      border: 1px solid rgba(124, 31, 43, 0.2);
+      background: rgba(124, 31, 43, 0.04);
+      color: var(--burgundy);
+      border-radius: 999px;
+      padding: 0.62rem 0.9rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .toggle-cards:hover {
+      background: rgba(124, 31, 43, 0.08);
+      border-color: rgba(124, 31, 43, 0.35);
+    }
+
+    .match-cards {
+      display: grid;
+      gap: 12px;
+    }
+
+    .calendar-panel.cards-hidden .match-cards {
+      display: none;
+    }
+
     .slot {
       position: relative;
       width: 100%;
@@ -416,7 +460,13 @@
     </section>
 
     <section class="calendar-layout">
-      <div class="calendar-panel" id="calendarPanel" aria-live="polite"></div>
+      <div class="calendar-panel" id="calendarPanel" aria-live="polite">
+        <div class="calendar-toolbar">
+          <span class="calendar-label">Available slots</span>
+          <button class="toggle-cards" id="toggleCardsButton" type="button" aria-expanded="true">Hide cards</button>
+        </div>
+        <div class="match-cards" id="matchCards"></div>
+      </div>
 
       <aside class="details-panel" id="detailsPanel" aria-live="polite">
         <div class="detail-eyebrow" id="detailType">Match</div>
@@ -462,17 +512,20 @@
 
     const MATCHES = [
       { id: "sunday", day: "Sunday", date: "This Sunday", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
-      { id: "tuesday", day: "Tuesday", date: "Next Tuesday", time: "8:00 PM", place: "TBA", gameType: "Pichangas (friendly match) - 6 aside or 5 aside {TBA}" },
+      { id: "tuesday", day: "Tuesday", date: "Next Tuesday", time: "8:00 PM", place: "TBA", gameType: "Pichangas (friendly match) - 6 aside or 5 aside {TBA}", hidden: true },
       { id: "wednesday", day: "Wednesday", date: "Next Wednesday", time: "5:00 PM", place: "TBA", gameType: "Friendly match - 6 aside" }
     ];
 
     let selectedMatchId = "sunday";
+    let cardsVisible = true;
 
     function renderCalendar() {
-      const panel = document.getElementById("calendarPanel");
+      const panel = document.getElementById("matchCards");
       panel.innerHTML = "";
 
       MATCHES.forEach((match) => {
+        if (match.hidden) return;
+
         const isSelected = match.id === selectedMatchId;
 
         const button = document.createElement("button");
@@ -495,6 +548,16 @@
 
         panel.appendChild(button);
       });
+    }
+
+    function toggleCardsVisibility() {
+      cardsVisible = !cardsVisible;
+      const panel = document.getElementById("calendarPanel");
+      const toggleButton = document.getElementById("toggleCardsButton");
+
+      panel.classList.toggle("cards-hidden", !cardsVisible);
+      toggleButton.textContent = cardsVisible ? "Hide cards" : "Show cards";
+      toggleButton.setAttribute("aria-expanded", String(cardsVisible));
     }
 
     function renderDetails() {
@@ -520,6 +583,7 @@
     }
 
     document.getElementById("enrollButton").addEventListener("click", enrollSelectedMatch);
+    document.getElementById("toggleCardsButton").addEventListener("click", toggleCardsVisibility);
 
     renderCalendar();
     renderDetails();
