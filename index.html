@@ -297,6 +297,53 @@
       transform: translateX(3px);
     }
 
+    .rules-panel {
+      margin-top: 24px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 26px 24px;
+    }
+
+    .rules-panel h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      letter-spacing: -0.05em;
+      color: var(--burgundy);
+    }
+
+    .rules-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 18px;
+    }
+
+    .rules-list li {
+      position: relative;
+      margin: 0;
+      padding: 14px 16px 14px 42px;
+      background: rgba(124, 31, 43, 0.04);
+      border: 1px solid rgba(124, 31, 43, 0.08);
+      border-radius: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .rules-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      color: var(--burgundy);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
     .site-footer {
       background: var(--burgundy-deep);
       color: #fffaf5;
@@ -366,7 +413,8 @@
       }
 
       .hero,
-      .content-grid {
+      .content-grid,
+      .rules-list {
         grid-template-columns: 1fr;
       }
 
@@ -443,6 +491,9 @@
           To play, enroll on the matchday page and make sure you are ready for the session.
         </p>
         <p>
+          Each match costs <strong>£4</strong> to play.
+        </p>
+        <p>
           You need to make an account on BUCS. Download the app <strong>BUCS Play</strong> and create your account before playing.
         </p>
       </article>
@@ -456,6 +507,19 @@
         </ul>
         <a class="panel-link" href="MatchDay.html">Go to matchday</a>
       </article>
+    </section>
+
+    <section class="rules-panel" aria-labelledby="rules-heading">
+      <h2 id="rules-heading">Main important points</h2>
+      <ul class="rules-list">
+        <li>Each team usually plays with 5 players on the pitch, including the goalkeeper.</li>
+        <li>Games are short and fast, often played in two halves with a brief break between them.</li>
+        <li>Rolling substitutions are common, so players can rotate in and out during the match.</li>
+        <li>There is no offside rule in 5-a-side football, which keeps the action more continuous.</li>
+        <li><strong>D rule:</strong> the defending team must retreat behind the ball when the goalkeeper has the ball in hands or during a restart, depending on the local rules.</li>
+        <li>Goalkeepers can use their hands only inside their own area, and restarts are crucial for control.</li>
+        <li>Foul play, dangerous tackles, and dissent can lead to free kicks, cards, or dismissal.</li>
+      </ul>
     </section>
   </main>
 
