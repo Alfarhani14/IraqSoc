@@ -511,12 +511,19 @@
     const COMMUNITY_LINK = "https://chat.whatsapp.com/Gh2ffnJpygcBOFNN8HhOnv";
 
     const MATCHES = [
-      { id: "sunday", day: "Sunday", date: "This Sunday", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
-      { id: "tuesday", day: "Tuesday", date: "Next Tuesday", time: "8:00 PM", place: "TBA", gameType: "Pichangas (friendly match) - 6 aside or 5 aside {TBA}", hidden: true },
-      { id: "wednesday", day: "Wednesday", date: "Next Wednesday", time: "5:00 PM", place: "TBA", gameType: "Friendly match - 6 aside" }
+      { id: "oct-18", day: "Sunday", date: "18 Oct 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "oct-25", day: "Sunday", date: "25 Oct 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "nov-01", day: "Sunday", date: "1 Nov 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "nov-08", day: "Sunday", date: "8 Nov 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "nov-15", day: "Sunday", date: "15 Nov 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "nov-22", day: "Sunday", date: "22 Nov 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "nov-29", day: "Sunday", date: "29 Nov 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "dec-06", day: "Sunday", date: "6 Dec 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "dec-13", day: "Sunday", date: "13 Dec 2026", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" },
+      { id: "feb-07", day: "Sunday", date: "7 Feb 2027", time: "2:00 PM", place: "Goodwin Sports Centre", gameType: "Campus League - 5-a-side" }
     ];
 
-    let selectedMatchId = "sunday";
+    let selectedMatchId = "oct-18";
     let cardsVisible = true;
 
     function renderCalendar() {
@@ -536,8 +543,8 @@
           <div class="slot-top">
             <span class="slot-label">${match.day}</span>
           </div>
-          <strong>${match.time}</strong>
-          <small>${match.gameType}<br>${match.place}</small>
+          <strong>${match.date}</strong>
+          <small>${match.time}<br>${match.gameType}<br>${match.place}</small>
         `;
 
         button.addEventListener("click", () => {
@@ -564,9 +571,9 @@
       const match = MATCHES.find((item) => item.id === selectedMatchId) || MATCHES[0];
 
       document.getElementById("detailType").textContent = "Match";
-      document.getElementById("detailTitle").textContent = `${match.day} at ${match.time}`;
+      document.getElementById("detailTitle").textContent = `${match.day} ${match.date} at ${match.time}`;
       document.getElementById("detailLocation").textContent = `${match.place}`;
-      document.getElementById("detailDay").textContent = match.day;
+      document.getElementById("detailDay").textContent = `${match.day} ${match.date}`;
       document.getElementById("detailTime").textContent = match.time;
       document.getElementById("detailLocationText").textContent = match.place;
       document.getElementById("detailGameType").textContent = match.gameType;
